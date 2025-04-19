@@ -1,4 +1,4 @@
-import { interval, switchMap, distinctUntilChanged } from "rxjs";
+import { interval, switchMap, catchError, of } from "rxjs";
 import { ajax } from "rxjs/ajax";
 
 const messagesContainer = document.querySelector(".messages-container");
@@ -42,18 +42,18 @@ function render(data) {
   });
 }
 
-interval(5000)
-  .pipe(
-    switchMap(() => ajax.getJSON("http://localhost:7070/messages/unread")),
-    distinctUntilChanged(),
-  )
-  .subscribe({
-    next(res) {
-      render(res);
-    },
-    error(err) {
-      if (err.stats == 400) {
-        render({ stats: "nothing" });
-      }
-    },
-  });
+const messageStream$ = interval(5000).pipe(
+  switchMap(() =>
+    ajax.getJSON("http://localhost:7070/messages/unread").pipe(
+      catchError((err) => {
+        if (err.status === 400) {
+          return of(err.response);
+        }
+      }),
+    ),
+  ),
+);
+
+messageStream$.subscribe((msgs) => {
+  render(msgs);
+});
