@@ -405,7 +405,7 @@ function __rewriteRelativeImportExtension(path, preserveJsx) {
 });
 
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isFunction.js
-function isFunction(value) {
+function isFunction_isFunction(value) {
     return typeof value === 'function';
 }
 //# sourceMappingURL=isFunction.js.map
@@ -482,7 +482,7 @@ var Subscription = (function () {
                 }
             }
             var initialFinalizer = this.initialTeardown;
-            if (isFunction(initialFinalizer)) {
+            if (isFunction_isFunction(initialFinalizer)) {
                 try {
                     initialFinalizer();
                 }
@@ -575,10 +575,10 @@ var Subscription = (function () {
 var EMPTY_SUBSCRIPTION = Subscription.EMPTY;
 function isSubscription(value) {
     return (value instanceof Subscription ||
-        (value && 'closed' in value && isFunction(value.remove) && isFunction(value.add) && isFunction(value.unsubscribe)));
+        (value && 'closed' in value && isFunction_isFunction(value.remove) && isFunction_isFunction(value.add) && isFunction_isFunction(value.unsubscribe)));
 }
 function execFinalizer(finalizer) {
-    if (isFunction(finalizer)) {
+    if (isFunction_isFunction(finalizer)) {
         finalizer();
     }
     else {
@@ -1010,7 +1010,7 @@ var SafeSubscriber = (function (_super) {
     function SafeSubscriber(observerOrNext, error, complete) {
         var _this = _super.call(this) || this;
         var partialObserver;
-        if (isFunction(observerOrNext) || !observerOrNext) {
+        if (isFunction_isFunction(observerOrNext) || !observerOrNext) {
             partialObserver = {
                 next: (observerOrNext !== null && observerOrNext !== void 0 ? observerOrNext : undefined),
                 error: error !== null && error !== void 0 ? error : undefined,
@@ -1186,7 +1186,7 @@ function getPromiseCtor(promiseCtor) {
     return (_a = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config.Promise) !== null && _a !== void 0 ? _a : Promise;
 }
 function isObserver(value) {
-    return value && isFunction(value.next) && isFunction(value.error) && isFunction(value.complete);
+    return value && isFunction_isFunction(value.next) && isFunction_isFunction(value.error) && isFunction_isFunction(value.complete);
 }
 function isSubscriber(value) {
     return (value && value instanceof Subscriber) || (isObserver(value) && isSubscription(value));
@@ -1195,7 +1195,7 @@ function isSubscriber(value) {
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isScheduler.js
 
 function isScheduler(value) {
-    return value && isFunction(value.schedule);
+    return value && isFunction_isFunction(value.schedule);
 }
 //# sourceMappingURL=isScheduler.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isDate.js
@@ -1258,20 +1258,20 @@ var isArrayLike = (function (x) { return x && typeof x.length === 'number' && ty
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isPromise.js
 
 function isPromise(value) {
-    return isFunction(value === null || value === void 0 ? void 0 : value.then);
+    return isFunction_isFunction(value === null || value === void 0 ? void 0 : value.then);
 }
 //# sourceMappingURL=isPromise.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isInteropObservable.js
 
 
 function isInteropObservable(input) {
-    return isFunction(input[observable]);
+    return isFunction_isFunction(input[observable]);
 }
 //# sourceMappingURL=isInteropObservable.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isAsyncIterable.js
 
 function isAsyncIterable(obj) {
-    return Symbol.asyncIterator && isFunction(obj === null || obj === void 0 ? void 0 : obj[Symbol.asyncIterator]);
+    return Symbol.asyncIterator && isFunction_isFunction(obj === null || obj === void 0 ? void 0 : obj[Symbol.asyncIterator]);
 }
 //# sourceMappingURL=isAsyncIterable.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/throwUnobservableError.js
@@ -1286,13 +1286,13 @@ function getSymbolIterator() {
     }
     return Symbol.iterator;
 }
-var iterator = getSymbolIterator();
+var iterator_iterator = getSymbolIterator();
 //# sourceMappingURL=iterator.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isIterable.js
 
 
 function isIterable(input) {
-    return isFunction(input === null || input === void 0 ? void 0 : input[iterator]);
+    return isFunction_isFunction(input === null || input === void 0 ? void 0 : input[iterator_iterator]);
 }
 //# sourceMappingURL=isIterable.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/util/isReadableStreamLike.js
@@ -1332,7 +1332,7 @@ function readableStreamLikeToAsyncGenerator(readableStream) {
     });
 }
 function isReadableStreamLike(obj) {
-    return isFunction(obj === null || obj === void 0 ? void 0 : obj.getReader);
+    return isFunction_isFunction(obj === null || obj === void 0 ? void 0 : obj.getReader);
 }
 //# sourceMappingURL=isReadableStreamLike.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/observable/innerFrom.js
@@ -1377,7 +1377,7 @@ function innerFrom(input) {
 function fromInteropObservable(obj) {
     return new Observable(function (subscriber) {
         var obs = obj[observable]();
-        if (isFunction(obs.subscribe)) {
+        if (isFunction_isFunction(obs.subscribe)) {
             return obs.subscribe(subscriber);
         }
         throw new TypeError('Provided object does not correctly implement Symbol.observable');
@@ -1482,7 +1482,7 @@ function process(asyncIterable, subscriber) {
 ;// ./node_modules/rxjs/dist/esm5/internal/util/lift.js
 
 function hasLift(source) {
-    return isFunction(source === null || source === void 0 ? void 0 : source.lift);
+    return isFunction_isFunction(source === null || source === void 0 ? void 0 : source.lift);
 }
 function operate(init) {
     return function (source) {
@@ -1587,30 +1587,245 @@ function switchMap(project, resultSelector) {
     });
 }
 //# sourceMappingURL=switchMap.js.map
-;// ./node_modules/rxjs/dist/esm5/internal/operators/distinctUntilChanged.js
+;// ./node_modules/rxjs/dist/esm5/internal/operators/catchError.js
 
 
 
-function distinctUntilChanged(comparator, keySelector) {
-    if (keySelector === void 0) { keySelector = identity; }
-    comparator = comparator !== null && comparator !== void 0 ? comparator : defaultCompare;
+function catchError(selector) {
     return operate(function (source, subscriber) {
-        var previousKey;
-        var first = true;
-        source.subscribe(createOperatorSubscriber(subscriber, function (value) {
-            var currentKey = keySelector(value);
-            if (first || !comparator(previousKey, currentKey)) {
-                first = false;
-                previousKey = currentKey;
-                subscriber.next(value);
+        var innerSub = null;
+        var syncUnsub = false;
+        var handledResult;
+        innerSub = source.subscribe(createOperatorSubscriber(subscriber, undefined, undefined, function (err) {
+            handledResult = innerFrom(selector(err, catchError(selector)(source)));
+            if (innerSub) {
+                innerSub.unsubscribe();
+                innerSub = null;
+                handledResult.subscribe(subscriber);
+            }
+            else {
+                syncUnsub = true;
             }
         }));
+        if (syncUnsub) {
+            innerSub.unsubscribe();
+            innerSub = null;
+            handledResult.subscribe(subscriber);
+        }
     });
 }
-function defaultCompare(a, b) {
-    return a === b;
+//# sourceMappingURL=catchError.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/util/args.js
+
+
+function last(arr) {
+    return arr[arr.length - 1];
 }
-//# sourceMappingURL=distinctUntilChanged.js.map
+function popResultSelector(args) {
+    return isFunction(last(args)) ? args.pop() : undefined;
+}
+function popScheduler(args) {
+    return isScheduler(last(args)) ? args.pop() : undefined;
+}
+function popNumber(args, defaultValue) {
+    return typeof last(args) === 'number' ? args.pop() : defaultValue;
+}
+//# sourceMappingURL=args.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/util/executeSchedule.js
+function executeSchedule(parentSubscription, scheduler, work, delay, repeat) {
+    if (delay === void 0) { delay = 0; }
+    if (repeat === void 0) { repeat = false; }
+    var scheduleSubscription = scheduler.schedule(function () {
+        work();
+        if (repeat) {
+            parentSubscription.add(this.schedule(null, delay));
+        }
+        else {
+            this.unsubscribe();
+        }
+    }, delay);
+    parentSubscription.add(scheduleSubscription);
+    if (!repeat) {
+        return scheduleSubscription;
+    }
+}
+//# sourceMappingURL=executeSchedule.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/operators/observeOn.js
+
+
+
+function observeOn(scheduler, delay) {
+    if (delay === void 0) { delay = 0; }
+    return operate(function (source, subscriber) {
+        source.subscribe(createOperatorSubscriber(subscriber, function (value) { return executeSchedule(subscriber, scheduler, function () { return subscriber.next(value); }, delay); }, function () { return executeSchedule(subscriber, scheduler, function () { return subscriber.complete(); }, delay); }, function (err) { return executeSchedule(subscriber, scheduler, function () { return subscriber.error(err); }, delay); }));
+    });
+}
+//# sourceMappingURL=observeOn.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/operators/subscribeOn.js
+
+function subscribeOn(scheduler, delay) {
+    if (delay === void 0) { delay = 0; }
+    return operate(function (source, subscriber) {
+        subscriber.add(scheduler.schedule(function () { return source.subscribe(subscriber); }, delay));
+    });
+}
+//# sourceMappingURL=subscribeOn.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduleObservable.js
+
+
+
+function scheduleObservable(input, scheduler) {
+    return innerFrom(input).pipe(subscribeOn(scheduler), observeOn(scheduler));
+}
+//# sourceMappingURL=scheduleObservable.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/schedulePromise.js
+
+
+
+function schedulePromise(input, scheduler) {
+    return innerFrom(input).pipe(subscribeOn(scheduler), observeOn(scheduler));
+}
+//# sourceMappingURL=schedulePromise.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduleArray.js
+
+function scheduleArray(input, scheduler) {
+    return new Observable(function (subscriber) {
+        var i = 0;
+        return scheduler.schedule(function () {
+            if (i === input.length) {
+                subscriber.complete();
+            }
+            else {
+                subscriber.next(input[i++]);
+                if (!subscriber.closed) {
+                    this.schedule();
+                }
+            }
+        });
+    });
+}
+//# sourceMappingURL=scheduleArray.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduleIterable.js
+
+
+
+
+function scheduleIterable(input, scheduler) {
+    return new Observable(function (subscriber) {
+        var iterator;
+        executeSchedule(subscriber, scheduler, function () {
+            iterator = input[iterator_iterator]();
+            executeSchedule(subscriber, scheduler, function () {
+                var _a;
+                var value;
+                var done;
+                try {
+                    (_a = iterator.next(), value = _a.value, done = _a.done);
+                }
+                catch (err) {
+                    subscriber.error(err);
+                    return;
+                }
+                if (done) {
+                    subscriber.complete();
+                }
+                else {
+                    subscriber.next(value);
+                }
+            }, 0, true);
+        });
+        return function () { return isFunction_isFunction(iterator === null || iterator === void 0 ? void 0 : iterator.return) && iterator.return(); };
+    });
+}
+//# sourceMappingURL=scheduleIterable.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduleAsyncIterable.js
+
+
+function scheduleAsyncIterable(input, scheduler) {
+    if (!input) {
+        throw new Error('Iterable cannot be null');
+    }
+    return new Observable(function (subscriber) {
+        executeSchedule(subscriber, scheduler, function () {
+            var iterator = input[Symbol.asyncIterator]();
+            executeSchedule(subscriber, scheduler, function () {
+                iterator.next().then(function (result) {
+                    if (result.done) {
+                        subscriber.complete();
+                    }
+                    else {
+                        subscriber.next(result.value);
+                    }
+                });
+            }, 0, true);
+        });
+    });
+}
+//# sourceMappingURL=scheduleAsyncIterable.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduleReadableStreamLike.js
+
+
+function scheduleReadableStreamLike(input, scheduler) {
+    return scheduleAsyncIterable(readableStreamLikeToAsyncGenerator(input), scheduler);
+}
+//# sourceMappingURL=scheduleReadableStreamLike.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/scheduled/scheduled.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+function scheduled(input, scheduler) {
+    if (input != null) {
+        if (isInteropObservable(input)) {
+            return scheduleObservable(input, scheduler);
+        }
+        if (isArrayLike(input)) {
+            return scheduleArray(input, scheduler);
+        }
+        if (isPromise(input)) {
+            return schedulePromise(input, scheduler);
+        }
+        if (isAsyncIterable(input)) {
+            return scheduleAsyncIterable(input, scheduler);
+        }
+        if (isIterable(input)) {
+            return scheduleIterable(input, scheduler);
+        }
+        if (isReadableStreamLike(input)) {
+            return scheduleReadableStreamLike(input, scheduler);
+        }
+    }
+    throw createInvalidObservableTypeError(input);
+}
+//# sourceMappingURL=scheduled.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/observable/from.js
+
+
+function from(input, scheduler) {
+    return scheduler ? scheduled(input, scheduler) : innerFrom(input);
+}
+//# sourceMappingURL=from.js.map
+;// ./node_modules/rxjs/dist/esm5/internal/observable/of.js
+
+
+function of() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var scheduler = popScheduler(args);
+    return from(args, scheduler);
+}
+//# sourceMappingURL=of.js.map
 ;// ./node_modules/rxjs/dist/esm5/internal/operators/map.js
 
 
@@ -1990,17 +2205,13 @@ function render(data) {
       `);
   });
 }
-interval(5000).pipe(switchMap(() => ajax.getJSON("http://localhost:7070/messages/unread")), distinctUntilChanged()).subscribe({
-  next(res) {
-    render(res);
-  },
-  error(err) {
-    if (err.stats == 400) {
-      render({
-        stats: "nothing"
-      });
-    }
+const messageStream$ = interval(5000).pipe(switchMap(() => ajax.getJSON("http://localhost:7070/messages/unread").pipe(catchError(err => {
+  if (err.status === 400) {
+    return of(err.response);
   }
+}))));
+messageStream$.subscribe(msgs => {
+  render(msgs);
 });
 ;// ./src/index.js
 
