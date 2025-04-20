@@ -25,7 +25,7 @@ function render(data) {
       year: "numeric",
     };
 
-    const date = new Date(received * 1000);
+    const date = new Date(received);
 
     const formattedDate = date.toLocaleDateString("ru-RU", options);
 
@@ -46,7 +46,7 @@ const messageStream$ = interval(5000).pipe(
   switchMap(() =>
     ajax.getJSON("http://localhost:7070/messages/unread").pipe(
       catchError((err) => {
-        if (err.status === 400) {
+        if (err.status === 500) {
           return of(err.response);
         }
       }),
